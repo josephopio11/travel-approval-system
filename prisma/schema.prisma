@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id
+  name      String
+  email     String   @unique
+  pass      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Employee {
+  id            Int          @id
+  firstName     String
+  lastName      String
+  email         String
+  designation   String
+  phone         String
+  lpo_reference String
+  departments   Department[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  trips         Trip[]
+  tripId        Int?
+
+  @@map("employees")
+}
+
+model Department {
+  id        Int        @id
+  name      String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  employees Employee[]
+
+  @@map("departments")
+}
+
+model Trip {
+  id             Int         @id
+  name           String
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  employees      Employee[]
+  travelPlan     TravelPlan?
+  Itinerary      Itinerary?
+  isVisaRequired Boolean     @default(false)
+  visaCost       Int?
+  expenses       Expense[]
+  advance        Advance?
+
+  @@map("trips")
+}
+
+model Itinerary {
+  id                 Int     @id
+  location           String
+  businessObjectives String?
+  deliverables       String?
+  tripId             Int     @unique
+  trip               Trip    @relation(fields: [tripId], references: [id])
+
+  @@map("itineraries")
+}
+
+model TravelPlan {
+  id                  Int      @id
+  fromDate            DateTime
+  toDate              DateTime
+  place               String
+  hotelName           String?
+  hotelAddress        String?
+  hotelPhone          String?
+  noOfNights          Int?
+  noOfDays            Int?
+  estDailyExpenditure Int?
+  tripId              Int      @unique
+  trip                Trip     @relation(fields: [tripId], references: [id])
+}
+
+model Expense {
+  id        Int    @id
+  item      String
+  unitPrice Int
+  Trip      Trip?  @relation(fields: [tripId], references: [id])
+  tripId    Int?
+
+  @@map("expenses")
+}
+
+model Advance {
+  id       Int    @id
+  currency String
+  amount   Int
+  tripId   Int    @unique
+  trip     Trip   @relation(fields: [tripId], references: [id])
+}
