@@ -1,0 +1,55 @@
+export const departments = [
+  { id: 1, name: "HR" },
+  { id: 2, name: "IT" },
+  { id: 3, name: "Sales" },
+  { id: 4, name: "Marketing" },
+  { id: 5, name: "Admin" },
+];
+
+export const employees = [
+  {
+    id: 1,
+    firstName: "Mike",
+    lastName: "Smith",
+    email: "mike@me.com",
+    designation: "Teacher",
+    phone: "123-456-7890",
+    lpo_reference: "ABC123",
+  },
+  {
+    id: 2,
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@me.com",
+    designation: "Manager",
+    phone: "123-456-7890",
+    lpo_reference: "ABC123",
+  },
+  {
+    id: 3,
+    firstName: "Jane",
+    lastName: "Doe",
+    email: "jane@me.com",
+    designation: "Manager",
+    phone: "123-456-7890",
+    lpo_reference: "ABC123",
+  },
+  {
+    id: 4,
+    firstName: "Peter",
+    lastName: "Doe",
+    email: "jane@me.com",
+    designation: "Manager",
+    phone: "123-456-7890",
+    lpo_reference: "ABC123",
+  },
+  {
+    id: 5,
+    firstName: "Luke",
+    lastName: "Doe",
+    email: "jane@me.com",
+    designation: "Manager",
+    phone: "123-456-7890",
+    lpo_reference: "ABC123",
+  },
+];
